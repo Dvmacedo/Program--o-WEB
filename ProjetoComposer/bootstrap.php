@@ -3,7 +3,7 @@
 require __DIR__."/vendor/autoload.php";
 
 $metodo = $_SERVER['REQUEST_METHOD'];
-$caminho = $_SERVER['PATH_INFO'];
+$caminho = $_SERVER['PATH_INFO'] ?? '/';
 
 $r = new Php\Primeiroprojeto\Router($metodo, $caminho);
 
@@ -11,6 +11,14 @@ $r = new Php\Primeiroprojeto\Router($metodo, $caminho);
 
 $r->get('/olamundo', function(){
     return "Olá Mundo!";
+});
+
+$r->get('/olapessoa', function(){
+    return "Olá Pessoa!";
+});
+
+$r->get('/olapessoa/{nome}', function($params){
+    return 'olá ' .$params[1];
 });
 
 #rotas
