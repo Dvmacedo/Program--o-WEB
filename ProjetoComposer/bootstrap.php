@@ -32,6 +32,21 @@ $r->post('/exer1/resposta', function(){
     return "A soma é: {$soma}";
 });
 
+$r->get('/exer2/formulario', function(){
+    include("exer2.html");
+});
+
+$r->post('/exer2/resposta', function(){
+    $number = $_POST['number'];
+    $number = intval($number);
+        if ($number > 0) {
+        echo "Valor Positivo";
+    } elseif ($number < 0) {
+        echo "Valor Negativo";
+    } else {
+        echo "Igual a Zero";
+}});
+
 #rotas
 
 $resultado = $r->handler();
