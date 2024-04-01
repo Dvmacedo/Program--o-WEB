@@ -47,6 +47,18 @@ $r->post('/exer2/resposta', function(){
         echo "Igual a Zero";
 }});
 
+$r->get('/exer3/formulario', function(){
+    include("exer3.html");
+});
+
+$r->post('/exer3/resposta', function(){
+    $numbers = $_POST['numbers'];
+    $smallest = min($numbers);
+    $position = array_search($smallest, $numbers) + 1; 
+        echo "O menor Número é: $smallest <br>";
+        echo "A posição dele na sequencia é: $position";
+});
+
 #rotas
 
 $resultado = $r->handler();
