@@ -59,6 +59,69 @@ $r->post('/exer3/resposta', function(){
         echo "A posição dele na sequencia é: $position";
 });
 
+$r->get('/exer4/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer4/resposta', function(){
+
+});
+
+$r->get('/exer5/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer5/resposta', function(){
+
+});
+
+$r->get('/exer6/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer6/resposta', function(){
+
+});
+
+$r->get('/exer7/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer7/resposta', function(){
+
+});
+
+$r->get('/exer8/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer8/resposta', function(){
+
+});
+
+$r->get('/exer9/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer9/resposta', function(){
+
+});
+
+$r->get('/exer10/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer10/resposta', function(){
+
+});
+
+$r->get('/exer11/formulario', function(){
+    include("exer4.html");
+});
+
+$r->post('/exer11/resposta', function(){
+
+});
 #rotas
 
 $resultado = $r->handler();
