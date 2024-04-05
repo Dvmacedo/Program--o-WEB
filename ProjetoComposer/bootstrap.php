@@ -19,9 +19,7 @@ $r->get('/olapessoa/{nome}', function($params){
     return 'olá ' .$params[1];
 });
 
-$r->get('/exer1/formulario', function(){
-    include("exer1.html");
-});
+$r->get('/exer1/formulario', 'Php\Primeiroprojeto\Controllers\HomeController@formExer1');
 
 $r->post('/exer1/resposta', function(){
     $valor1 = $_POST['valor1'];
@@ -130,4 +128,11 @@ if(!$resultado){
     die();
 }
 
-echo $resultado($r->getParams());
+if ($resultado instanceof Closure){
+    echo $resultado($r->getParams());
+} elseif (is_string($resultado)){
+    $resultado = explode("@", $resultado);
+    $controller = new $resultado[0];
+    $resultado = $resultado[1];
+    echo $controller->$resultado($r->getParams());
+}
