@@ -9,9 +9,7 @@ $r = new Php\Primeiroprojeto\Router($metodo, $caminho);
 
 #rotas
 
-$r->get('/olamundo', function(){
-    return "Olá Mundo!";
-});
+$r->get('/olamundo', 'Php\Primeiroprojeto\Controllers\HomeControllers@olaMundo');
 
 $r->get('/olapessoa', function(){
     return "Olá Pessoa!";
