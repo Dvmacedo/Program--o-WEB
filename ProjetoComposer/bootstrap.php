@@ -118,6 +118,11 @@ $r->get('/exer11/formulario', function(){
 $r->post('/exer11/resposta', function(){
 
 });
+
+$r->get('/categoria/inserir', 'Php\Primeiroprojeto\Controllers\CategoriaController@inserir');
+
+$r->post('/categoria/novo', 'Php\Primeiroprojeto\Controllers\CategoriaController@novo');
+
 #rotas
 
 $resultado = $r->handler();
