@@ -1,4 +1,11 @@
 <?php
+require __DIR__."/vendor/autoload.php";
+
+$metodo = $_SERVER['REQUEST_METHOD'];
+$caminho = $_SERVER['PATH_INFO'] ?? '/';
+
+$routes = new Php\projetoTables\Router($metodo, $caminho);
+
 $routes->get('/insertForms', function() {
     require_once '../src/views/insertForms.php';
 });
