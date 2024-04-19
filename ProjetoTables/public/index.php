@@ -1,2 +1,2 @@
 <?php
-require_once '../src/routes/routes.php';
+    include __DIR__.'/../bootstrap.php';

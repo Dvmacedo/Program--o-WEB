@@ -1,10 +1,10 @@
 <?php
-$router->get('/insertForms', function() {
+$routes->get('/insertForms', function() {
     require_once '../src/views/insertForms.php';
 });
 
 // Receber dados do formulário e inserir nas tabelas
-$router->post('/insert', function() {
+$routes->post('/insert', function() {
     require_once '../../config/database.php';
     require_once '../models/Table1.php';
     require_once '../models/Table2.php';
@@ -46,6 +46,6 @@ $router->post('/insert', function() {
     exit;
 });
 
-$router->get('/success', function() {
+$routes->get('/success', function() {
     require_once '../src/views/success.php';
 });
