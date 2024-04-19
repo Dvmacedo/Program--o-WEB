@@ -1,51 +1,73 @@
 <?php
-$router->get('/insertForms', function() {
-    require_once '../src/views/insertForms.php';
-});
 
-// Receber dados do formulário e inserir nas tabelas
-$router->post('/insert', function() {
-    require_once '../../config/database.php';
-    require_once '../models/Table1.php';
-    require_once '../models/Table2.php';
-    require_once '../models/Table3.php';
-    require_once '../models/Table4.php';
+namespace Php\projetoTables;
 
-    // Receber dados do formulário
-    $data_for_table1 = $_POST['data_for_table1'];
-    $data_for_table2 = $_POST['data_for_table2'];
-    $data_for_table3 = $_POST['data_for_table3'];
-    $data_for_table4 = $_POST['data_for_table4'];
+class Router
+{
+    private $routes = [];
+    private $method;
+    private $path;
+    private $params;
 
-    // Conexão com o banco de dados
-    $conn = new mysqli($host, $username, $password, $database);
-
-    // Verificar conexão
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    public function __construct($method, $path)
+    {
+        $this->method = $method;
+        $this->path = $path;
     }
 
-    // Inserir registros nas tabelas
-    $table1 = new Table1($conn);
-    $table1->insert($data_for_table1);
+    public function get(string $route, $action)
+    {
+        $this->add('GET', $route, $action);
+    }
 
-    $table2 = new Table2($conn);
-    $table2->insert($data_for_table2);
+    public function post(string $route, $action)
+    {
+        $this->add('POST', $route, $action);
+    }
 
-    $table3 = new Table3($conn);
-    $table3->insert($data_for_table3);
+    private function add(string $method, string $route, $action){
+        $this->routes[$method][$route] = $action;
+    }
 
-    $table4 = new Table4($conn);
-    $table4->insert($data_for_table4);
+    public function getParams()
+    {
+        return $this->params;
+    }
 
-    // Fechar conexão
-    $conn->close();
+    public function handler()
+    {
+        if (empty($this->routes[$this->method])){
+            return false;
+        }
 
-    // Redirecionar para página de sucesso
-    header("Location: /success");
-    exit;
-});
+        if (isset($this->routes[$this->method][$this->path])){
+            return $this->routes[$this->method][$this->path];
+        }
 
-$router->get('/success', function() {
-    require_once '../src/views/success.php';
-});
+        foreach($this->routes[$this->method] as $route => $action){
+            $result = $this->checkUrl($route, $this->path);
+            if ($result >= 1){
+                return $action;
+            }
+        }
+    }
+
+    private function checkUrl(string $route, $path)
+    {
+
+        preg_match_all('/\{([^\}]*)\}/', $route, $variables);
+
+        $regex = str_replace('/', '\/', $route);
+
+        foreach ($variables[0] as $k => $variable) {
+            $replacement = '([a-zA-Z0-9\-\_\ ]+)';
+            $regex = str_replace($variable, $replacement, $regex);
+        }
+
+        $regex = preg_replace('/{([a-zA-Z]+)}/', '([a-zA-Z0-9+])', $regex);
+        $result = preg_match('/^' . $regex . '$/', $path, $params);
+        $this->params = $params;
+
+        return $result;
+    }
+}
