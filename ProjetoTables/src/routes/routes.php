@@ -1,12 +1,8 @@
 <?php
-// Definição de rotas
-// GET /insert-form
-// Exibir formulário de inserção
-$router->get('/insert-form', function() {
-    require_once '../src/views/insert_form.php';
+$router->get('/insertForms', function() {
+    require_once '../src/views/insertForms.php';
 });
 
-// POST /insert
 // Receber dados do formulário e inserir nas tabelas
 $router->post('/insert', function() {
     require_once '../../config/database.php';
@@ -50,8 +46,6 @@ $router->post('/insert', function() {
     exit;
 });
 
-// GET /success
-// Exibir mensagem de sucesso após a inserção
 $router->get('/success', function() {
     require_once '../src/views/success.php';
 });
