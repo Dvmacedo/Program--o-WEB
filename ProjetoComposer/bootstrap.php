@@ -161,6 +161,8 @@ $r->get('/categoria/inserir', 'Php\Primeiroprojeto\Controllers\CategoriaControll
 
 $r->post('/categoria/novo', 'Php\Primeiroprojeto\Controllers\CategoriaController@novo');
 
+$r->get('/categoria/{acao}/{status}', 'Php\Primeiroprojeto\Controllers\CategoriaController@index');
+
 #rotas
 
 $resultado = $r->handler();
