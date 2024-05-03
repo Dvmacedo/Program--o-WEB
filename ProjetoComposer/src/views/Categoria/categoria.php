@@ -55,7 +55,11 @@
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        let table = new DataTable('#tabela');
+        var table = new DataTable('#tabela', {
+            language: {
+            url: '//cdn.datatables.net/plug-ins/2.0.6/i18n/pt-BR.json',
+            },
+        });
     </script>
   </body>
 </html>
