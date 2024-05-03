@@ -33,10 +33,10 @@
                             <td><?= $c['descricao'] ?></td>
                             <td></td>
                             <td>
-                                <a href="#" class="btn btn-warning">
+                                <a href="/categoria/alterar/id/<?= $c["id"]?>" class="btn btn-warning">
                                     Alterar
                                 </a>
-                                <a href="#" class="btn btn-danger">
+                                <a href="/categoria/excluir/id/<?= $c["id"]?>" class="btn btn-danger">
                                     Excluir
                                 </a>
                             </td>

@@ -6,16 +6,6 @@ class CategoriaController{
     public function index($params){
         $categoriaDAO = new CategoriaDAO();
         $resultado = $categoriaDAO->consultarTodos();
-        if (isset($_GET['inserir'])){
-            $inserir = $_GET['inserir'];
-            if ($inserir == "true"){
-                $inserir_sucesso="";
-                $inserir_erro="hidden";
-            } else if ($inserir == "false"){
-                $inserir_erro="";
-                $inserir_sucesso="hidden";
-            }
-        }
         $acao = $params[1] ?? "";
         $status = $params[2] ?? "";
         if($acao == "inserir" && $status == "true")
@@ -26,7 +16,6 @@ class CategoriaController{
             $mensagem = "";
         require_once("../src/Views/categoria/categoria.php");
     }
-
     public function inserir($params){
         require_once("../src/Views/categoria/inserir_categoria.html");
     }
@@ -34,12 +23,28 @@ class CategoriaController{
         $categoria = new Categoria(0, $_POST['descricao']);
         $categoriaDAO = new CategoriaDAO();
         if ($categoriaDAO->inserir($categoria)){
-            header("location: /categoria?inserir=true");
             header("location: /categoria/inserir/true");
         } else {
-            header("location: /categoria?inserir=false");
             header("location: /categoria/inserir/false");
         }
     }
-
+    public function alterar($params){
+        $categoriaDAO = new CategoriaDAO();
+        $resultado = $categoriaDAO->consultar($params[1]);
+        require_once("../src/Views/categoria/alterar_categoria.php");
+    }
+    public function excluir($params){
+        $categoriaDAO = new CategoriaDAO();
+        $resultado = $categoriaDAO->consultar($params[1]);
+        require_once("../src/Views/categoria/excluir_categoria.php");
+    }
+    public function editar($params){
+        $categoria = new Categoria($_POST['id'], $_POST['descricao']);
+        $categoriaDAO = new CategoriaDAO();
+        if ($categoriaDAO->alterar($categoria)){
+            header("location: /categoria/alterar/true");
+        } else {
+            header("location: /categoria/alterar/false");
+        }
+    }
 }

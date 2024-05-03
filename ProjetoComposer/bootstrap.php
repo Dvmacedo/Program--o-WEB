@@ -161,7 +161,15 @@ $r->get('/categoria/inserir', 'Php\Primeiroprojeto\Controllers\CategoriaControll
 
 $r->post('/categoria/novo', 'Php\Primeiroprojeto\Controllers\CategoriaController@novo');
 
+$r->get('/categoria', 'Php\Primeiroprojeto\Controllers\CategoriaController@index');
+
 $r->get('/categoria/{acao}/{status}', 'Php\Primeiroprojeto\Controllers\CategoriaController@index');
+
+$r->get('/categoria/alterar/id/{id}', 'Php\Primeiroprojeto\Controllers\CategoriaController@alterar');
+
+$r->get('/categoria/excluir/id/{id}', 'Php\Primeiroprojeto\Controllers\CategoriaController@excluir');
+
+$r->post('/categoria/editar/id/{id}', 'Php\Primeiroprojeto\Controllers\CategoriaController@editar');
 
 #rotas
 
