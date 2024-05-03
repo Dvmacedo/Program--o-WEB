@@ -169,7 +169,9 @@ $r->get('/categoria/alterar/id/{id}', 'Php\Primeiroprojeto\Controllers\Categoria
 
 $r->get('/categoria/excluir/id/{id}', 'Php\Primeiroprojeto\Controllers\CategoriaController@excluir');
 
-$r->post('/categoria/editar/id/{id}', 'Php\Primeiroprojeto\Controllers\CategoriaController@editar');
+$r->post('/categoria/editar', 'Php\Primeiroprojeto\Controllers\CategoriaController@editar');
+
+$r->post('/categoria/deletar', 'Php\Primeiroprojeto\Controllers\CategoriaController@deletar');
 
 #rotas
 

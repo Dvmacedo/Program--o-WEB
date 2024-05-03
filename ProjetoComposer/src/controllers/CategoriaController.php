@@ -12,6 +12,10 @@ class CategoriaController{
             $mensagem = "Registro inserido com sucesso!";
         elseif($acao == "inserir" && $status == "false")
             $mensagem = "Erro ao inserir!";
+        elseif($acao == "alterar" && $status == "true")
+            $mensagem = "Registro alterado com sucesso!";
+        elseif($acao == "alterar" && $status == "false")
+            $mensagem = "Erro ao alterar!";
         else 
             $mensagem = "";
         require_once("../src/Views/categoria/categoria.php");
