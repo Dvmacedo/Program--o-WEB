@@ -16,6 +16,10 @@ class CategoriaController{
             $mensagem = "Registro alterado com sucesso!";
         elseif($acao == "alterar" && $status == "false")
             $mensagem = "Erro ao alterar!";
+        elseif($acao == "excluir" && $status == "true")
+            $mensagem = "Registro excluido com sucesso!";
+        elseif($acao == "excluir" && $status == "false")
+            $mensagem = "Erro ao excluir!";
         else 
             $mensagem = "";
         require_once("../src/Views/categoria/categoria.php");
@@ -23,6 +27,7 @@ class CategoriaController{
     public function inserir($params){
         require_once("../src/Views/categoria/inserir_categoria.html");
     }
+    
     public function novo($params){
         $categoria = new Categoria(0, $_POST['descricao']);
         $categoriaDAO = new CategoriaDAO();
@@ -49,6 +54,14 @@ class CategoriaController{
             header("location: /categoria/alterar/true");
         } else {
             header("location: /categoria/alterar/false");
+        }
+    }
+    public function deletar($params){
+        $categoriaDAO = new CategoriaDAO();
+        if ($categoriaDAO->excluir($_POST['id'])){
+            header("location: /categoria/excluir/true");
+        } else {
+            header("location: /categoria/excluir/false");
         }
     }
 }
