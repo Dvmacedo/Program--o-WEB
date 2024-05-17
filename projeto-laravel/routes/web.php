@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +30,5 @@ Route::post('/exer1resp', function(Request $request){
     $valor = $request->input('valor1');
     return $valor;
 });
+
+Route::get('/mensagem/{mensagem}', [HomeController::class, 'mostrarMensagem']);
