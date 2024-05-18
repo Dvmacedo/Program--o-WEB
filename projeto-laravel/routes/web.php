@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,21 +14,18 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function(){
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/bem-vindo', function(){
-    return "Seja bem vindo!";
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/exer1', function(){
-    return view('exer1');
-});
-
-Route::post('/exer1resp', function(Request $request){
-    $valor = $request->input('valor1');
-    return $valor;
-});
-
-Route::get('/mensagem/{mensagem}', [HomeController::class, 'mostrarMensagem']);
+require __DIR__.'/auth.php';
