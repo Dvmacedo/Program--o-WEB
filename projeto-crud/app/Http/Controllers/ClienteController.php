@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
@@ -19,7 +20,9 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        //mostra formulario de cadastro com metodo GET
+        return view('cliente.create');
+
     }
 
     /**
@@ -27,7 +30,13 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //salva os dados com metodo POST
+        Cliente::create([
+            'nome' => $request->input('nome'),
+            'telefone' => $request->input('telefone'),
+            'email' => $request->input('email')
+        ]);
+        return "Registro inserido!";
     }
 
     /**
@@ -60,5 +69,9 @@ class ClienteController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function delete(string $id)
+    {
+
     }
 }
