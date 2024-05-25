@@ -9,8 +9,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/mensagem/{mensagem}", [MensagemController::class, 'mostrarMensagem']);
+Route::get(
+    "/mensagem/{mensagem}", [MensagemController::class, 'mostrarMensagem']);
 
 Route::resources([
     'clientes' => ClienteController::class,
 ]);
+
+Route::get(
+    '/clientes/delete/{id}', [ClienteController::class, 'delete']);
+
+Route::get(
+    '/clientes/edit/{id}', [ClienteController::class, 'edit']);
